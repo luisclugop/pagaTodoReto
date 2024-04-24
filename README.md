@@ -50,8 +50,12 @@ Copy the `.env.example` file to `.env` and update the values.
 Finally, run the following commands to start the development server:
 
 ```
-pnpm install
-pnpm dev
+<!-- pnpm install
+pnpm dev -->
+
+<!-- Estable -->
+npm install
+npm run dev
 ```
 
 You should now be able to access the application at http://localhost:3000.
