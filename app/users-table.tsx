@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
 import { deleteUser } from './actions';
+import SortBy from 'sort-by'
 
 export function UsersTable(data: any) {
 
@@ -27,9 +28,13 @@ export function UsersTable(data: any) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.data.map((dataBank: any) => (
+            {data.data
+            .filter((dataBank: any) => dataBank.bankName)
+            .sort((a: any, b: any) => a.bankName.localeCompare(b.bankName))// Filtrar elementos con 'bankName' definido
+            .map((dataBank: any) => (
               <UserRow key={dataBank.age} dataBank={dataBank} />
-            ))}
+            ))
+          }
           </TableBody>
         </Table>
       </form>
@@ -45,7 +50,7 @@ function UserRow({ dataBank }: { dataBank: any }) {
     <TableRow>
       <TableCell className="font-medium">{dataBank.bankName}</TableCell>
       <TableCell className="hidden md:table-cell">{dataBank.description}</TableCell>
-      <TableCell>{dataBank.url}</TableCell>
+      <TableCell className="font-medium"><a href={dataBank.url}>URL</a></TableCell>
       <TableCell>
         <Button
           className="w-full"
